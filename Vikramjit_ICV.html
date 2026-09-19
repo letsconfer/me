@@ -6,7 +6,7 @@
     <title>Vikramjit Singh - Comprehensive CV</title>
     <style>
         :root {
-            --app-bg: #EBF3FA; /* Sky Blue / Off-White tint for light mode */
+            --app-bg: #EBF3FA;
             --container-bg: #FFFFFF;
             --text-color: #1A1A1A;
             --border-color: #D0D7DE;
@@ -29,7 +29,6 @@
             line-height: 1.15;
             margin: 0;
             padding: 20px;
-            /* Block text selection globally */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -56,7 +55,7 @@
         .cv-container {
             background-color: var(--container-bg);
             color: var(--text-color);
-            padding: 1in; /* Exact 1 inch normal margins */
+            padding: 1in;
             max-width: 850px;
             margin: 0 auto;
             border: 1px solid var(--border-color);
@@ -64,7 +63,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Header Layout with Photo */
+        /* Header Layout with Vertical Rectangular Photo & Rounded Corners */
         .cv-header {
             display: flex;
             align-items: center;
@@ -74,14 +73,13 @@
 
         .profile-img {
             width: 110px;
-            height: 110px;
-            border-radius: 50%;
+            height: 215px; /* Scaled for 810x1600 vertical ratio */
+            border-radius: 8px; /* Rounded corners */
             object-fit: cover;
             border: 2px solid var(--border-color);
             flex-shrink: 0;
         }
 
-        /* Typography & Paragraph Spacing constraints */
         p, li, span, div {
             font-family: Arial, Calibri, sans-serif;
             font-size: 11pt;
@@ -112,7 +110,6 @@
             margin: 12pt 0;
         }
 
-        /* Hide content completely if print media is triggered */
         @media print {
             body { display: none !important; }
         }
@@ -125,7 +122,7 @@
     </div>
 
     <div class="cv-container">
-        <!-- Header Section with Profile Photo -->
+        <!-- Header Section with Vertical Profile Photo -->
         <div class="cv-header">
             <img src="me.jpeg" alt="Vikramjit Singh" class="profile-img">
             <div>
@@ -223,7 +220,6 @@
     <script>
         const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 
-        // Theme Toggle Function
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute("data-theme") === "light") {
@@ -233,13 +229,11 @@
             }
         }
 
-        // Block Right-Click Context Menu
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             alert(restrictionMessage);
         });
 
-        // Block Copy / Cut / Dragging
         document.addEventListener('copy', function(e) {
             e.preventDefault();
             alert(restrictionMessage);
@@ -254,7 +248,6 @@
             e.preventDefault();
         });
 
-        // Block Keyboard Shortcuts (Print, Save, View Source, DevTools, PrintScreen)
         document.addEventListener('keydown', function(e) {
             if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'u' || e.key === 'P' || e.key === 'S' || e.key === 'U')) {
                 e.preventDefault();
