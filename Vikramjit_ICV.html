@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikramjit Singh - CV</title>
+    <title>Vikramjit Singh - Comprehensive CV</title>
     <style>
         :root {
             --app-bg: #EBF3FA; /* Sky Blue / Off-White tint for light mode */
             --container-bg: #FFFFFF;
             --text-color: #1A1A1A;
             --border-color: #D0D7DE;
-            --muted-color: #57606A;
+            --nav-bg: #F6F8FA;
         }
 
         [data-theme="dark"] {
@@ -18,7 +18,7 @@
             --container-bg: #1E1E1E;
             --text-color: #E0E0E0;
             --border-color: #333333;
-            --muted-color: #8B949E;
+            --nav-bg: #2D2D2D;
         }
 
         body {
@@ -37,8 +37,9 @@
         }
 
         .theme-switcher {
-            text-align: center;
-            margin-bottom: 20px;
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+            text-align: right;
         }
 
         .theme-switcher button {
@@ -63,6 +64,23 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
+        /* Header Layout with Photo */
+        .cv-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 12pt;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
         /* Typography & Paragraph Spacing constraints */
         p, li, span, div {
             font-family: Arial, Calibri, sans-serif;
@@ -78,9 +96,9 @@
             margin-bottom: 6pt;
         }
 
-        h1 { font-size: 20pt; }
+        h1 { font-size: 20pt; margin: 0; }
         h2 { font-size: 14pt; border-bottom: 1px solid var(--border-color); padding-bottom: 3px; }
-        h3 { font-size: 12pt; font-weight: bold; }
+        h3 { font-size: 12pt; font-weight: bold; margin: 2px 0; }
 
         ul {
             margin-top: 2pt;
@@ -103,13 +121,19 @@
 <body data-theme="light">
 
     <div class="theme-switcher">
-        <button onclick="toggleTheme()">Switch to Dark / Light Mode</button>
+        <button onclick="toggleTheme()">Toggle Theme</button>
     </div>
 
     <div class="cv-container">
-        <h1>Vikramjit Singh</h1>
-        <h3>Software Project Manager</h3>
-        <p><b>Hyderabad, India</b> | <b>(+91) 9781381213</b> | <b>kuwar.vikram@gmail.com</b></p>
+        <!-- Header Section with Profile Photo -->
+        <div class="cv-header">
+            <img src="me.jpeg" alt="Vikramjit Singh" class="profile-img">
+            <div>
+                <h1>Vikramjit Singh</h1>
+                <h3>Software Project Manager</h3>
+                <p><b>Hyderabad, India</b> | <b>(+91) 9781381213</b> | <b>kuwar.vikram@gmail.com</b></p>
+            </div>
+        </div>
         <hr>
 
         <h2>PROFESSIONAL SUMMARY</h2>
@@ -192,7 +216,7 @@
         <h2>CERTIFICATIONS & EDUCATION</h2>
         <ul>
             <li><b>Certifications:</b> Jira Foundation Badge (Atlassian), Advanced Lean Six Sigma Yellow Belt (Sparen & Gewinn), Lean Six Sigma Yellow & White Belts.</li>
-            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2002–2005).</li>
+            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2003–2006).</li>
         </ul>
     </div>
 
