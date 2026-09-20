@@ -3,15 +3,19 @@ let isInternalAction = false;
 
 function toggleTheme() {
     const body = document.body;
-    const themeBtnImg = document.getElementById('theme-icon');
+    const themeImg = document.getElementById('theme-icon');
     const currentTheme = body.getAttribute("data-theme");
     
     if (currentTheme === "light") {
         body.setAttribute("data-theme", "dark");
-        if (themeBtnImg) themeBtnImg.src = "LightBulb.jpeg"; // Show light bulb in dark mode to switch back
+        if (themeImg) {
+            themeImg.src = "light-bulb.svg";
+        }
     } else {
         body.setAttribute("data-theme", "light");
-        if (themeBtnImg) themeBtnImg.src = "DarkBulb.jpeg";  // Show dark bulb in light mode to switch to dark
+        if (themeImg) {
+            themeImg.src = "dark-bulb.svg";
+        }
     }
 }
 
@@ -36,16 +40,17 @@ document.addEventListener("DOMContentLoaded", function() {
         
         switcher.innerHTML = '';
         
-        // 1. Theme Toggle Icon Button (Shows DarkBulb in light mode, LightBulb in dark mode)
+        // 1. Theme Toggle Icon Button
         const themeBtn = document.createElement('button');
         themeBtn.type = 'button';
         themeBtn.onclick = toggleTheme;
         themeBtn.title = "Toggle Theme";
         
         const currentTheme = document.body.getAttribute("data-theme") || "light";
+        
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
-        themeImg.src = currentTheme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
+        themeImg.src = currentTheme === "dark" ? "light-bulb.svg" : "dark-bulb.svg";
         themeImg.alt = "Toggle Theme";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
