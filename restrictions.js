@@ -1,22 +1,21 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
+function updateThemeIcon(theme) {
+    const themeImg = document.getElementById('theme-icon');
+    if (themeImg) {
+        // Light theme shows DarkBulb.jpeg, Dark theme shows LightBulb.jpeg
+        themeImg.src = theme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
+    }
+}
+
 function toggleTheme() {
     const body = document.body;
-    const themeImg = document.getElementById('theme-icon');
-    const currentTheme = body.getAttribute("data-theme");
+    const currentTheme = body.getAttribute("data-theme") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
     
-    if (currentTheme === "light") {
-        body.setAttribute("data-theme", "dark");
-        if (themeImg) {
-            themeImg.src = "LightBulb.jpeg";
-        }
-    } else {
-        body.setAttribute("data-theme", "light");
-        if (themeImg) {
-            themeImg.src = "DarkBulb.jpeg";
-        }
-    }
+    body.setAttribute("data-theme", newTheme);
+    updateThemeIcon(newTheme);
 }
 
 function downloadPDF() {
@@ -62,12 +61,14 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
-        themeImg.src = currentTheme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
         themeImg.alt = "Toggle Theme";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
         themeImg.style.display = "block";
         themeBtn.appendChild(themeImg);
+        
+        // Set correct initial icon
+        updateThemeIcon(currentTheme);
         
         // 2. Download PDF Button
         const downloadBtn = document.createElement('button');
