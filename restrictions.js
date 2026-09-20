@@ -1,16 +1,32 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
+// Load Profile Image from Master Config if available
+function applyMasterConfig() {
+    const config = window.CV_MASTER_CONFIG || {};
+    
+    // Apply profile image across all avatar slots if config is present
+    if (config.profileImage) {
+        const profileImgs = document.querySelectorAll('.profile-img');
+        profileImgs.forEach(img => {
+            img.src = config.profileImage;
+        });
+    }
+
+    // Apply left-click / selection restriction
+    if (config.allowLeftClick === false) {
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+    } else {
+        document.body.style.userSelect = 'auto';
+        document.body.style.webkitUserSelect = 'auto';
+    }
+}
+
 function updateThemeButton() {
     const themeBtn = document.getElementById('theme-toggle-btn');
     if (themeBtn) {
         const currentTheme = document.body.getAttribute("data-theme") || "light";
-        
-        // Button shows what theme you'll GET when you click it
-        // Light theme ON -> show DarkBulb (to switch to dark)
-        // Dark theme ON -> show LightBulb (to switch to light)
-        console.log("Current Theme:", currentTheme); // DEBUG
-        
         if (currentTheme === "dark") {
             themeBtn.style.backgroundImage = "url('LightBulb.jpeg?v=2026')";
         } else {
@@ -28,16 +44,12 @@ function toggleTheme() {
     body.setAttribute("data-theme", newTheme);
     html.setAttribute("data-theme", newTheme);
     
-    // HARD RESET OPTION: Complete reinitialize theme button
     const themeBtn = document.getElementById('theme-toggle-btn');
     if (themeBtn) {
-        themeBtn.style.backgroundImage = 'none'; // Clear old image
+        themeBtn.style.backgroundImage = 'none';
     }
     
-    // Force repaint
     void body.offsetHeight;
-    
-    // Reinitialize button with fresh styles
     setTimeout(() => {
         updateThemeButton();
     }, 50);
@@ -52,6 +64,9 @@ function downloadPDF() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    applyMasterConfig();
+    
+    const config = window.CV_MASTER_CONFIG || {};
     const switcher = document.querySelector('.cv-container .theme-switcher') || document.querySelector('.theme-switcher');
     
     if (switcher) {
@@ -86,42 +101,60 @@ document.addEventListener("DOMContentLoaded", function() {
             document.documentElement.setAttribute("data-theme", "light");
         }
 
-        // 1. Theme Toggle Button
-        const themeBtn = document.createElement('button');
-        themeBtn.id = 'theme-toggle-btn';
-        baseButtonStyle(themeBtn);
-        themeBtn.onclick = toggleTheme;
-        themeBtn.title = "Toggle Theme";
+        // 1. Theme Toggle Button (Controlled by Master Config)
+        if (config.showThemeIcon !== false) {
+            const themeBtn = document.createElement('button');
+            themeBtn.id = 'theme-toggle-btn';
+            baseButtonStyle(themeBtn);
+            themeBtn.onclick = toggleTheme;
+            themeBtn.title = "Toggle Theme";
+            switcher.appendChild(themeBtn);
+            updateThemeButton();
+        }
         
-        // 2. Download PDF Button
-        const downloadBtn = document.createElement('button');
-        downloadBtn.id = 'download-pdf-btn';
-        baseButtonStyle(downloadBtn);
-        downloadBtn.onclick = downloadPDF;
-        downloadBtn.title = "Download PDF";
-        downloadBtn.style.backgroundImage = "url('Download.jpeg?v=2026')";
-
-        switcher.appendChild(themeBtn);
-        switcher.appendChild(downloadBtn);
-
-        updateThemeButton();
+        // 2. Download PDF Button (Controlled by Master Config)
+        if (config.showDownloadIcon !== false) {
+            const downloadBtn = document.createElement('button');
+            downloadBtn.id = 'download-pdf-btn';
+            baseButtonStyle(downloadBtn);
+            downloadBtn.onclick = downloadPDF;
+            downloadBtn.title = "Download PDF";
+            downloadBtn.style.backgroundImage = "url('Download.jpeg?v=2026')";
+            switcher.appendChild(downloadBtn);
+        }
     }
 });
 
-// ========== SECURITY RESTRICTIONS ==========
+// ========== SECURITY & RESTRICTIONS (Controlled by Master Config) ==========
 document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    alert(restrictionMessage);
+    const config = window.CV_MASTER_CONFIG || {};
+    if (!config.allowRightClick) {
+        e.preventDefault();
+        alert(restrictionMessage);
+    }
+});
+
+document.addEventListener('click', function(e) {
+    const config = window.CV_MASTER_CONFIG || {};
+    if (config.allowLeftClick === false) {
+        // Optional left-click behavior suppression if needed
+    }
 });
 
 document.addEventListener('copy', function(e) {
-    e.preventDefault();
-    alert(restrictionMessage);
+    const config = window.CV_MASTER_CONFIG || {};
+    if (!config.allowRightClick) {
+        e.preventDefault();
+        alert(restrictionMessage);
+    }
 });
 
 document.addEventListener('cut', function(e) {
-    e.preventDefault();
-    alert(restrictionMessage);
+    const config = window.CV_MASTER_CONFIG || {};
+    if (!config.allowRightClick) {
+        e.preventDefault();
+        alert(restrictionMessage);
+    }
 });
 
 document.addEventListener('dragstart', function(e) {
@@ -129,8 +162,12 @@ document.addEventListener('dragstart', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
+    const config = window.CV_MASTER_CONFIG || {};
     if (isInternalAction) return;
     
+    // If screenshot / shortcuts are allowed, skip blocking
+    if (config.allowScreenshot) return;
+
     // Block Ctrl+P (Print), Ctrl+S (Save), Ctrl+U (View Source)
     if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'u' || e.key === 'P' || e.key === 'S' || e.key === 'U')) {
         e.preventDefault();
@@ -144,7 +181,7 @@ document.addEventListener('keydown', function(e) {
         alert(restrictionMessage);
     }
 
-    // Block F12 (DevTools) and Ctrl+Shift+I/J/C (Developer Tools)
+    // Block F12 (DevTools) and Ctrl+Shift+I/J/C
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
         e.preventDefault();
         alert(restrictionMessage);
