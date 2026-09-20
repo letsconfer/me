@@ -5,11 +5,14 @@ function updateThemeButton() {
     const themeBtn = document.getElementById('theme-toggle-btn');
     if (themeBtn) {
         const currentTheme = document.body.getAttribute("data-theme") || "light";
-        // Light mode -> DarkBulb.jpeg, Dark mode -> LightBulb.jpeg
-        if (currentTheme === "dark") {
-            themeBtn.style.backgroundImage = "url('LightBulb.jpeg?v=2026')";
-        } else {
+        
+        // Button shows what theme you'll GET when you click it
+        // Light theme ON -> show DarkBulb (to switch to dark)
+        // Dark theme ON -> show LightBulb (to switch to light)
+        if (currentTheme === "light") {
             themeBtn.style.backgroundImage = "url('DarkBulb.jpeg?v=2026')";
+        } else {
+            themeBtn.style.backgroundImage = "url('LightBulb.jpeg?v=2026')";
         }
     }
 }
@@ -90,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Security Restrictions
+// ========== SECURITY RESTRICTIONS ==========
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     alert(restrictionMessage);
@@ -113,17 +116,20 @@ document.addEventListener('dragstart', function(e) {
 document.addEventListener('keydown', function(e) {
     if (isInternalAction) return;
     
+    // Block Ctrl+P (Print), Ctrl+S (Save), Ctrl+U (View Source)
     if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'u' || e.key === 'P' || e.key === 'S' || e.key === 'U')) {
         e.preventDefault();
         alert(restrictionMessage);
     }
     
+    // Block PrintScreen
     if (e.key === 'PrintScreen' || e.keyCode === 44) {
         e.preventDefault();
         navigator.clipboard.writeText('');
         alert(restrictionMessage);
     }
 
+    // Block F12 (DevTools) and Ctrl+Shift+I/J/C (Developer Tools)
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
         e.preventDefault();
         alert(restrictionMessage);
