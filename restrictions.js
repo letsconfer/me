@@ -9,12 +9,12 @@ function toggleTheme() {
     if (currentTheme === "light") {
         body.setAttribute("data-theme", "dark");
         if (themeImg) {
-            themeImg.src = "light-bulb.svg";
+            themeImg.src = "LightBulb.jpeg";
         }
     } else {
         body.setAttribute("data-theme", "light");
         if (themeImg) {
-            themeImg.src = "dark-bulb.svg";
+            themeImg.src = "DarkBulb.jpeg";
         }
     }
 }
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
-        themeImg.src = currentTheme === "dark" ? "light-bulb.svg" : "dark-bulb.svg";
+        themeImg.src = currentTheme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
         themeImg.alt = "Toggle Theme";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
