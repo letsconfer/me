@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const currentTheme = document.body.getAttribute("data-theme") || "light";
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
-        themeImg.src = currentTheme === "dark" ? "bulblitoff.jpeg" : "bulbliton.jpeg";
+        themeImg.src = currentTheme === "dark" ? "DarkBulb.jpeg" : "LightBulb.jpeg";
         themeImg.alt = "Theme";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
