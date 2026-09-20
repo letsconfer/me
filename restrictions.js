@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
         themeImg.style.verticalAlign = "middle";
         themeBtn.appendChild(themeImg);
         
-        // 2. Download PDF Icon Button (No name, uses download.jpeg)
+        // 2. Download PDF Icon Button (No name, uses Download.jpeg)
         const downloadBtn = document.createElement('button');
         downloadBtn.type = 'button';
         downloadBtn.onclick = downloadPDF;
         downloadBtn.title = "Download PDF";
         
         const downloadImg = document.createElement('img');
-        downloadImg.src = "download.jpeg";
+        downloadImg.src = "Download.jpeg";
         downloadImg.alt = "Download PDF";
         downloadImg.style.width = "20px";
         downloadImg.style.height = "20px";
