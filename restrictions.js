@@ -1,14 +1,81 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
+let isInternalAction = false;
 
+// Theme Toggle Function with Icon Switching
 function toggleTheme() {
     const body = document.body;
+    const themeBtnImg = document.getElementById('theme-icon');
     if (body.getAttribute("data-theme") === "light") {
         body.setAttribute("data-theme", "dark");
+        if (themeBtnImg) themeBtnImg.src = "bulblitoff.jpeg";
     } else {
         body.setAttribute("data-theme", "light");
+        if (themeBtnImg) themeBtnImg.src = "bulbliton.jpeg";
     }
 }
 
+// Secure PDF Download Function (Bypasses restriction specifically for this button)
+function downloadPDF() {
+    isInternalAction = true;
+    window.print();
+    setTimeout(() => {
+        isInternalAction = false;
+    }, 1000);
+}
+
+// Automatically inject and manage icon buttons inside .theme-switcher
+document.addEventListener("DOMContentLoaded", function() {
+    const switcher = document.querySelector('.theme-switcher');
+    if (switcher) {
+        switcher.innerHTML = '';
+        
+        // 1. Theme Toggle Icon Button
+        const themeBtn = document.createElement('button');
+        themeBtn.type = 'button';
+        themeBtn.onclick = toggleTheme;
+        themeBtn.title = "Toggle Theme";
+        
+        const currentTheme = document.body.getAttribute("data-theme") || "light";
+        const themeImg = document.createElement('img');
+        themeImg.id = 'theme-icon';
+        themeImg.src = currentTheme === "dark" ? "bulblitoff.jpeg" : "bulbliton.jpeg";
+        themeImg.alt = "Theme";
+        themeImg.style.width = "20px";
+        themeImg.style.height = "20px";
+        themeImg.style.verticalAlign = "middle";
+        themeBtn.appendChild(themeImg);
+        
+        // 2. Download PDF Icon Button (No name, uses download.jpeg)
+        const downloadBtn = document.createElement('button');
+        downloadBtn.type = 'button';
+        downloadBtn.onclick = downloadPDF;
+        downloadBtn.title = "Download PDF";
+        
+        const downloadImg = document.createElement('img');
+        downloadImg.src = "download.jpeg";
+        downloadImg.alt = "Download PDF";
+        downloadImg.style.width = "20px";
+        downloadImg.style.height = "20px";
+        downloadImg.style.verticalAlign = "middle";
+        downloadBtn.appendChild(downloadImg);
+
+        // Styling for both icon buttons
+        [themeBtn, downloadBtn].forEach(btn => {
+            btn.style.background = "var(--container-bg)";
+            btn.style.color = "var(--text-color)";
+            btn.style.border = "1px solid var(--border-color)";
+            btn.style.padding = "6px 10px";
+            btn.style.borderRadius = "4px";
+            btn.style.cursor = "pointer";
+        });
+        themeBtn.style.marginRight = "8px";
+
+        switcher.appendChild(themeBtn);
+        switcher.appendChild(downloadBtn);
+    }
+});
+
+// Security Restrictions
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     alert(restrictionMessage);
@@ -29,6 +96,8 @@ document.addEventListener('dragstart', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
+    if (isInternalAction) return;
+    
     if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'u' || e.key === 'P' || e.key === 'S' || e.key === 'U')) {
         e.preventDefault();
         alert(restrictionMessage);
