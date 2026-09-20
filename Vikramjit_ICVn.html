@@ -19,92 +19,100 @@
     </div>
 
     <div class="cv-container">
-        <h1>Vikramjit Singh[cite: 2]</h1>
-        <h3>Software Project Manager[cite: 2]</h3>
-        <p><b>Hyderabad, India</b> | <b>(+91) 9781381213</b> | <b>kuwar.vikram@gmail.com</b></p>
+        <!-- Avatar / Header Component Loaded Separately -->
+        <div id="avatar-slot"></div>
+        <script>
+            fetch('avatar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('avatar-slot').innerHTML = html;
+                })
+                .catch(err => console.error('Error loading avatar:', err));
+        </script>
+        
         <hr>
 
-        <h2>PROFESSIONAL SUMMARY[cite: 2]</h2>
-        <p>Software Project Manager with overall 19+ years of enterprise software delivery, specializing in multi-tenant SaaS platforms, high-compliance student management systems, and enterprise EdTech architectures. Proven expertise in leading cross-functional Agile/Scrum teams, managing full product lifecycles. Available immediately and open to strategic leadership opportunities.[cite: 2]</p>
+        <h2>PROFESSIONAL SUMMARY</h2>
+        <p>Software Project Manager with overall 19+ years of enterprise software delivery, specializing in multi-tenant SaaS platforms, high-compliance student management systems, and enterprise EdTech architectures. Proven expertise in leading cross-functional Agile/Scrum teams, managing full product lifecycles. Available immediately and open to strategic leadership opportunities.</p>
 
-        <h2>CORE COMPETENCIES[cite: 2]</h2>
+        <h2>CORE COMPETENCIES</h2>
         <ul>
-            <li><b>Methodologies & Frameworks:</b> Agile, Scrum, Kanban, Lean Six Sigma, Waterfall, SDLC, Sprint Planning, Backlog Grooming, Daily Stand-ups, Retrospectives, Velocity Tracking, OKRs, KPIs, User Stories, Acceptance Criteria.[cite: 2]</li>
-            <li><b>Project Management Tools:</b> Jira, Confluence, Asana, Trello, Monday.com, Teamwork, Zendesk, TestRail, Postman, Newman.[cite: 2]</li>
-            <li><b>Technical Stack & Data:</b> GitHub, GitLab, CI/CD Pipelines, Release Management, MS SQL, PostgreSQL, Power BI, Tableau, Advanced Excel, Google Analytics.[cite: 2]</li>
-            <li><b>Leadership & Domain Expertise:</b> Stakeholder Management, Risk Mitigation, Cross-Functional Team Leadership, Client Onboarding, Enterprise EdTech Platforms, Student Information Systems (SIS) Integration.[cite: 2]</li>
+            <li><b>Methodologies & Frameworks:</b> Agile, Scrum, Kanban, Lean Six Sigma, Waterfall, SDLC, Sprint Planning, Backlog Grooming, Daily Stand-ups, Retrospectives, Velocity Tracking, OKRs, KPIs, User Stories, Acceptance Criteria.</li>
+            <li><b>Project Management Tools:</b> Jira, Confluence, Asana, Trello, Monday.com, Teamwork, Zendesk, TestRail, Postman, Newman.</li>
+            <li><b>Technical Stack & Data:</b> GitHub, GitLab, CI/CD Pipelines, Release Management, MS SQL, PostgreSQL, Power BI, Tableau, Advanced Excel, Google Analytics.</li>
+            <li><b>Leadership & Domain Expertise:</b> Stakeholder Management, Risk Mitigation, Cross-Functional Team Leadership, Client Onboarding, Enterprise EdTech Platforms, Student Information Systems (SIS) Integration.</li>
         </ul>
 
-        <h2>AI TOOLS & ADOPTION | EMERGING TECHNOLOGY[cite: 2]</h2>
-        <p>Actively upskilling in AI tools relevant to project management, team productivity, and software delivery. Practical working knowledge includes:[cite: 2]</p>
+        <h2>AI TOOLS & ADOPTION | EMERGING TECHNOLOGY</h2>
+        <p>Actively upskilling in AI tools relevant to project management, team productivity, and software delivery. Practical working knowledge includes:</p>
         <ul>
-            <li><b>ChatGPT & Claude (Anthropic):</b> Prompt engineering applied to sprint documentation, retrospective summaries, user story drafting, acceptance criteria generation, and stakeholder report preparation.[cite: 2]</li>
-            <li><b>Notion AI / Confluence AI:</b> Facilitating AI-assisted knowledge management, structured meeting summarization, and streamlined team documentation workflows.[cite: 2]</li>
-            <li><b>AI-powered Analytics:</b> Integrating Power BI Copilot and AI dashboard tools for advanced delivery reporting and real-time sprint insight generation.[cite: 2]</li>
+            <li><b>ChatGPT & Claude (Anthropic):</b> Prompt engineering applied to sprint documentation, retrospective summaries, user story drafting, acceptance criteria generation, and stakeholder report preparation.</li>
+            <li><b>Notion AI / Confluence AI:</b> Facilitating AI-assisted knowledge management, structured meeting summarization, and streamlined team documentation workflows.</li>
+            <li><b>AI-powered Analytics:</b> Integrating Power BI Copilot and AI dashboard tools for advanced delivery reporting and real-time sprint insight generation.</li>
         </ul>
 
-        <h2>WORK EXPERIENCE[cite: 2]</h2>
-        <h3>Software Project Manager | Truly Imagine Pty Ltd (EduRP)[cite: 2]</h3>
-        <p><i>Remote</i> | Jan 2023 - May 2025[cite: 2]</p>
+        <h2>WORK EXPERIENCE</h2>
+        <h3>Software Project Manager | Truly Imagine Pty Ltd (EduRP)</h3>
+        <p><i>Remote</i> | Jan 2023 - May 2025</p>
         <ul>
-            <li>Directed a cross-functional team of 6 using Scrum, maintaining 95%+ on-time delivery across 3 active sprint cycles per month.[cite: 2]</li>
-            <li>Leveraged AI workflows (ChatGPT, Claude, Notion AI) for automated sprint documentation, user story drafting, and retrospective summaries.[cite: 2]</li>
-            <li>Facilitated daily stand-ups and retrospectives via Jira/Confluence, reducing sprint carry-over by 30%.[cite: 2]</li>
-            <li>Owned end-to-end product roadmap, aligning milestones with business OKRs and reducing post-release defects by 25% via structured QA strategies.[cite: 2]</li>
+            <li>Directed a cross-functional team of 6 using Scrum, maintaining 95%+ on-time delivery across 3 active sprint cycles per month.</li>
+            <li>Leveraged AI workflows (ChatGPT, Claude, Notion AI) for automated sprint documentation, user story drafting, and retrospective summaries.</li>
+            <li>Facilitated daily stand-ups and retrospectives via Jira/Confluence, reducing sprint carry-over by 30%.</li>
+            <li>Owned end-to-end product roadmap, aligning milestones with business OKRs and reducing post-release defects by 25% via structured QA strategies.</li>
         </ul>
 
-        <h3>Freelance PM Consulting | Independent[cite: 2]</h3>
-        <p><i>Career Upskilling Period</i> | Apr 2022 - Dec 2022[cite: 2]</p>
+        <h3>Freelance PM Consulting | Independent</h3>
+        <p><i>Career Upskilling Period</i> | Apr 2022 - Dec 2022</p>
         <ul>
-            <li>Completed Atlassian Jira Foundation and Advanced Lean Six Sigma certifications.[cite: 2]</li>
-            <li>Provided advisory services in project process documentation and workflow optimization for software clients.[cite: 2]</li>
+            <li>Completed Atlassian Jira Foundation and Advanced Lean Six Sigma certifications.</li>
+            <li>Provided advisory services in project process documentation and workflow optimization for software clients.</li>
         </ul>
 
-        <h3>Software Project Manager | Sydney School of Business & Technology[cite: 2]</h3>
-        <p><i>India</i> | Jul 2021 - Apr 2022[cite: 2]</p>
+        <h3>Software Project Manager | Sydney School of Business & Technology</h3>
+        <p><i>India</i> | Jul 2021 - Apr 2022</p>
         <ul>
-            <li>Delivered student management platform from requirements to go-live in under 10 months using Agile/Scrum (120+ user stories).[cite: 2]</li>
-            <li>Maintained prioritized backlog and oversaw integration testing using MS SQL and PostgreSQL to ensure enterprise data integrity.[cite: 2]</li>
+            <li>Delivered student management platform from requirements to go-live in under 10 months using Agile/Scrum (120+ user stories).</li>
+            <li>Maintained prioritized backlog and oversaw integration testing using MS SQL and PostgreSQL to ensure enterprise data integrity.</li>
         </ul>
 
-        <h3>Database Administrator & Senior Product Manager | Total Synergy Concepts[cite: 2]</h3>
-        <p><i>Amritsar</i> | Nov 2019 - Jun 2021[cite: 2]</p>
+        <h3>Database Administrator & Senior Product Manager | Total Synergy Concepts</h3>
+        <p><i>Amritsar</i> | Nov 2019 - Jun 2021</p>
         <ul>
-            <li>Managed product improvement sprints and compliance data analytics using MS SQL and Excel.[cite: 2]</li>
-            <li>Maintained active risk register across sprints, escalating blockers proactively to achieve zero critical defects at release.[cite: 2]</li>
+            <li>Managed product improvement sprints and compliance data analytics using MS SQL and Excel.</li>
+            <li>Maintained active risk register across sprints, escalating blockers proactively to achieve zero critical defects at release.</li>
         </ul>
 
-        <h3>Senior Product Support & Support Team Lead | Dream Net Software Pvt Ltd[cite: 2]</h3>
-        <p><i>Amritsar</i> | Nov 2008 - Oct 2019[cite: 2]</p>
+        <h3>Senior Product Support & Support Team Lead | Dream Net Software Pvt Ltd</h3>
+        <p><i>Amritsar</i> | Nov 2008 - Oct 2019</p>
         <ul>
-            <li>Translated client requirements into user stories and sprint tags using Teamwork, Asana, and GitHub.[cite: 2]</li>
-            <li>Led client onboarding and data migration projects using MS SQL and PostgreSQL, reducing onboarding time by 35%.[cite: 2]</li>
-            <li>Managed escalated client issues via Zendesk, performing root cause analysis to feed actionable feedback into product roadmaps.[cite: 2]</li>
+            <li>Translated client requirements into user stories and sprint tags using Teamwork, Asana, and GitHub.</li>
+            <li>Led client onboarding and data migration projects using MS SQL and PostgreSQL, reducing onboarding time by 35%.</li>
+            <li>Managed escalated client issues via Zendesk, performing root cause analysis to feed actionable feedback into product roadmaps.</li>
         </ul>
 
-        <h3>WFM Executive / Technical Support | Kochar InfoTech Pvt Ltd[cite: 2]</h3>
-        <p><i>Amritsar</i> | Oct 2005 - Oct 2008[cite: 2]</p>
+        <h3>WFM Executive / Technical Support | Kochar InfoTech Pvt Ltd</h3>
+        <p><i>Amritsar</i> | Oct 2005 - Oct 2008</p>
         <ul>
-            <li>Managed workforce scheduling and employee data for major telecom accounts, improving SLA adherence and system performance.[cite: 2]</li>
+            <li>Managed workforce scheduling and employee data for major telecom accounts, improving SLA adherence and system performance.</li>
         </ul>
 
-        <h2>KEY PROJECTS[cite: 2]</h2>
-        <h3>EduRP SMS - Finance Module & Timetabling[cite: 2]</h3>
-        <p><i>Mar 2024 - May 2025</i>[cite: 2]</p>
+        <h2>KEY PROJECTS</h2>
+        <h3>EduRP SMS - Finance Module & Timetabling</h3>
+        <p><i>Mar 2024 - May 2025</i></p>
         <ul>
-            <li>Facilitated Agile sprints for Finance Module redesign using AI-assisted documentation workflows, achieving zero critical defects at go-live and improving scheduling accuracy by 40%.[cite: 2]</li>
+            <li>Facilitated Agile sprints for Finance Module redesign using AI-assisted documentation workflows, achieving zero critical defects at go-live and improving scheduling accuracy by 40%.</li>
         </ul>
 
-        <h3>Student Management System (SMS)[cite: 2]</h3>
-        <p><i>Jul 2021 - Apr 2022</i>[cite: 2]</p>
+        <h3>Student Management System (SMS)</h3>
+        <p><i>Jul 2021 - Apr 2022</i></p>
         <ul>
-            <li>Delivered full-stack student management platform from requirements to UAT in 10 months, managing 120+ user stories across sprints.[cite: 2]</li>
+            <li>Delivered full-stack student management platform from requirements to UAT in 10 months, managing 120+ user stories across sprints.</li>
         </ul>
 
-        <h2>CERTIFICATIONS & EDUCATION[cite: 2]</h2>
+        <h2>CERTIFICATIONS & EDUCATION</h2>
         <ul>
-            <li><b>Certifications:</b> Jira Foundation Badge (Atlassian), Advanced Lean Six Sigma Yellow Belt (Sparen & Gewinn), Lean Six Sigma Yellow & White Belts.[cite: 2]</li>
-            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2003–2006).[cite: 2]</li>
+            <li><b>Certifications:</b> Jira Foundation Badge (Atlassian), Advanced Lean Six Sigma Yellow Belt (Sparen & Gewinn), Lean Six Sigma Yellow & White Belts.</li>
+            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2003–2006).</li>
         </ul>
     </div>
 
