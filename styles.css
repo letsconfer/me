@@ -40,6 +40,7 @@ body {
 }
 
 .cv-container {
+    position: relative; /* Required to anchor the top-right buttons */
     background-color: var(--container-bg);
     color: var(--text-color);
     padding: 1in;
