@@ -4,12 +4,14 @@ let isInternalAction = false;
 function toggleTheme() {
     const body = document.body;
     const themeBtnImg = document.getElementById('theme-icon');
-    if (body.getAttribute("data-theme") === "light") {
+    const currentTheme = body.getAttribute("data-theme");
+    
+    if (currentTheme === "light") {
         body.setAttribute("data-theme", "dark");
-        if (themeBtnImg) themeBtnImg.src = "LightBulb.jpeg";
+        if (themeBtnImg) themeBtnImg.src = "LightBulb.jpeg"; // Show light bulb in dark mode to switch back
     } else {
         body.setAttribute("data-theme", "light");
-        if (themeBtnImg) themeBtnImg.src = "DarkBulb.jpeg";
+        if (themeBtnImg) themeBtnImg.src = "DarkBulb.jpeg";  // Show dark bulb in light mode to switch to dark
     }
 }
 
@@ -26,15 +28,15 @@ document.addEventListener("DOMContentLoaded", function() {
     
     if (switcher) {
         switcher.style.position = 'absolute';
-        switcher.style.top = '20px';
-        switcher.style.right = '20px';
+        switcher.style.top = '15px';
+        switcher.style.right = '15px';
         switcher.style.margin = '0';
         switcher.style.textAlign = 'right';
         switcher.style.zIndex = '10';
         
         switcher.innerHTML = '';
         
-        // 1. Single Theme Toggle Icon Button based on active theme
+        // 1. Theme Toggle Icon Button (Shows DarkBulb in light mode, LightBulb in dark mode)
         const themeBtn = document.createElement('button');
         themeBtn.type = 'button';
         themeBtn.onclick = toggleTheme;
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
         themeImg.src = currentTheme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
-        themeImg.alt = "";
+        themeImg.alt = "Toggle Theme";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
         themeImg.style.display = "block";
@@ -58,24 +60,11 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const downloadImg = document.createElement('img');
         downloadImg.src = "Download.jpeg";
-        downloadImg.alt = "";
+        downloadImg.alt = "Download PDF";
         downloadImg.style.width = "20px";
         downloadImg.style.height = "20px";
         downloadImg.style.display = "block";
         downloadBtn.appendChild(downloadImg);
-
-        // Styling for both icon-only buttons
-        [themeBtn, downloadBtn].forEach(btn => {
-            btn.style.background = "var(--container-bg)";
-            btn.style.border = "1px solid var(--border-color)";
-            btn.style.padding = "6px";
-            btn.style.borderRadius = "4px";
-            btn.style.cursor = "pointer";
-            btn.style.display = "inline-flex";
-            btn.style.alignItems = "center";
-            btn.style.justifyContent = "center";
-        });
-        themeBtn.style.marginRight = "8px";
 
         switcher.appendChild(themeBtn);
         switcher.appendChild(downloadBtn);
