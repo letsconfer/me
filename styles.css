@@ -47,14 +47,15 @@ body {
     margin: 0;
     text-align: right;
     z-index: 10;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .theme-switcher button {
-    background-color: var(--container-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 4px;
-    border-radius: 4px;
+    background: transparent;
+    border: none;
+    padding: 2px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
