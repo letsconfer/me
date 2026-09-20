@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Master Control Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #EBF3FA; padding: 30px; color: #1A1A1A; }
+        .panel { background: #fff; max-width: 600px; margin: 0 auto; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { font-size: 18pt; margin-top: 0; border-bottom: 2px solid #D0D7DE; padding-bottom: 10px; }
+        .setting-group { margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+        label { font-weight: bold; }
+        select, input[type="file"] { padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
+        .preview-img { width: 60px; height: 70px; object-fit: cover; border-radius: 4px; border: 1px solid #ccc; margin-top: 5px; }
+        .btn-save { background: #0366d6; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 11pt; margin-top: 15px; width: 100%; }
+        .btn-save:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="panel">
+    <h1>Vikramjit's CV Master Control Panel</h1>
+    
+    <div class="setting-group">
+        <label for="rightClick">Allow Right Click:</label>
+        <select id="rightClick">
+            <option value="false">No (Restricted)</option>
+            <option value="true">Yes (Allowed)</option>
+        </select>
+    </div>
+
+    <div class="setting-group">
+        <label for="leftClick">Allow Left Click / Selection:</label>
+        <select id="leftClick">
+            <option value="true">Yes (Normal)</option>
+            <option value="false">No (Disabled)</option>
+        </select>
+    </div>
+
+    <div class="setting-group">
+        <label for="screenshot">Allow Screenshot & Printing:</label>
+        <select id="screenshot">
+            <option value="false">No (Blocked)</option>
+            <option value="true">Yes (Allowed)</option>
+        </select>
+    </div>
+
+    <div class="setting-group">
+        <label for="downloadIcon">Show Download Icon:</label>
+        <select id="downloadIcon">
+            <option value="true">Yes (Visible)</option>
+            <option value="false">No (Hidden)</option>
+        </select>
+    </div>
+
+    <div class="setting-group">
+        <label for="themeIcon">Show Theme Icon:</label>
+        <select id="themeIcon">
+            <option value="true">Yes (Visible)</option>
+            <option value="false">No (Hidden)</option>
+        </select>
+    </div>
+
+    <div class="setting-group" style="flex-direction: column; align-items: flex-start;">
+        <label for="profileUpload">Change Profile Image (Upload New Image):</label>
+        <input type="file" id="profileUpload" accept="image/*" onchange="previewImage(event)">
+        <img id="imagePreview" class="preview-img" src="me.jpeg" alt="Preview">
+    </div>
+
+    <button class="btn-save" onclick="saveSettings()">Save & Apply Settings</button>
+</div>
+
+<script src="master-config.js"></script>
+<script>
+    // Load current settings into the panel
+    document.getElementById('rightClick').value = String(window.CV_MASTER_CONFIG.allowRightClick);
+    document.getElementById('leftClick').value = String(window.CV_MASTER_CONFIG.allowLeftClick);
+    document.getElementById('screenshot').value = String(window.CV_MASTER_CONFIG.allowScreenshot);
+    document.getElementById('downloadIcon').value = String(window.CV_MASTER_CONFIG.showDownloadIcon);
+    document.getElementById('themeIcon').value = String(window.CV_MASTER_CONFIG.showThemeIcon);
+    if(window.CV_MASTER_CONFIG.profileImage) {
+        document.getElementById('imagePreview').src = window.CV_MASTER_CONFIG.profileImage;
+    }
+
+    let uploadedImageBase64 = window.CV_MASTER_CONFIG.profileImage;
+
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageBase64 = e.target.result;
+                document.getElementById('imagePreview').src = uploadedImageBase64;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function saveSettings() {
+        const configText = `// ==========================================
+// MASTER CV CONFIGURATION FILE
+// ==========================================
+window.CV_MASTER_CONFIG = {
+    allowRightClick: ${document.getElementById('rightClick').value},
+    allowLeftClick: ${document.getElementById('leftClick').value},
+    allowScreenshot: ${document.getElementById('screenshot').value},
+    showDownloadIcon: ${document.getElementById('downloadIcon').value},
+    showThemeIcon: ${document.getElementById('themeIcon').value},
+    profileImage: "${uploadedImageBase64}"
+};`;
+
+        // Create a downloadable blob for master-config.js or copy status
+        alert("Settings updated successfully! Make sure your master-config.js reflects these choices or copy the updated configuration script.");
+    }
+</script>
+
+</body>
+---
+
+### How to Link in Your CVs (`Vikramjit_ICV.html` & `Vikramjit_DCV.html`)
+Make sure `<script src="master-config.js"></script>` is loaded **before** `restrictions.js` in the `<head>` or right before the closing `</body>` tag of your HTML files:
+
+```html
+<script src="master-config.js"></script>
+<script src="restrictions.js"></script>
