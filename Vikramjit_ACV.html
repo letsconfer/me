@@ -22,8 +22,16 @@
                 })
                 .catch(err => console.error('Error loading avatar:', err));
         </script>
-        <p><b>Immediate Joiner | Open to Relocation</b></p>
+        
         <hr>
+
+        <!-- Contact Information Bar with Interactive Call & Copy Email -->
+        <div class="contact-info" style="margin-bottom: 20px; font-weight: 500;">
+            Hyderabad, India | 
+            <a href="tel:+919781381213" style="color: inherit; text-decoration: underline;">(+91) 9781381213</a> | 
+            <a href="#" id="email-link" onclick="copyEmail(event, 'kuwar.vikram@gmail.com')" style="color: inherit; text-decoration: underline;">kuwar.vikram@gmail.com</a>
+            <span id="copy-feedback" style="margin-left: 8px; font-size: 0.85em; color: #28a745; display: none; font-weight: bold;">(Copied!)</span>
+        </div>
 
         <h2>PROFESSIONAL SUMMARY</h2>
         <p>Software Project Manager and Team Lead with 18+ years delivering enterprise software for Australian and Indian markets, specializing in RTO/VET compliance systems (AVETMISS, CRICOS, VFH/VSL, USI Integration) and EdTech platforms. Proven expertise in leading cross-functional Agile/Scrum teams, managing full product lifecycles, and applying Lean Six Sigma principles. Available immediately and open to relocation to Australia.</p>
@@ -48,7 +56,7 @@
         <h3>Software Project Manager | Truly Imagine Pty Ltd</h3>
         <p><i>Remote - Australian-based company</i> | Jan 2023 - May 2025</p>
         <ul>
-            <li>Directed a cross-functional team of 15 using Scrum, maintaining 95%+ on-time delivery across 3 active sprint cycles per month.</li>
+            <li>Directed a cross-functional team of 6 using Scrum, maintaining 95%+ on-time delivery across 3 active sprint cycles per month.</li>
             <li>Leveraged AI workflows (ChatGPT, Claude, Notion AI) for automated sprint documentation, user story drafting, and retrospective summaries.</li>
             <li>Facilitated daily stand-ups and retrospectives via Jira/Confluence, reducing sprint carry-over by 30%.</li>
             <li>Owned end-to-end product roadmap and release calendar, aligning milestones with business OKRs and reducing post-release defects by 25% via structured QA strategies.</li>
@@ -112,6 +120,22 @@
             <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2002–2005).</li>
         </ul>
     </div>
+
+    <!-- Copy Email Script -->
+    <script>
+    function copyEmail(event, email) {
+        event.preventDefault();
+        navigator.clipboard.writeText(email).then(() => {
+            const feedback = document.getElementById('copy-feedback');
+            feedback.style.display = 'inline';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy email: ', err);
+        });
+    }
+    </script>
 
     <!-- IMPORTANT: Load master-config.js FIRST, then restrictions.js -->
     <script src="master-config.js"></script>
