@@ -23,10 +23,20 @@ function downloadPDF() {
 
 document.addEventListener("DOMContentLoaded", function() {
     const switcher = document.querySelector('.theme-switcher');
-    if (switcher) {
+    const container = document.querySelector('.cv-container');
+    
+    if (switcher && container) {
+        // Position the button group at the top right of the CV container frame
+        switcher.style.position = 'absolute';
+        switcher.style.top = '20px';
+        switcher.style.right = '20px';
+        switcher.style.margin = '0';
+        switcher.style.textAlign = 'right';
+        switcher.style.zIndex = '10';
+        
         switcher.innerHTML = '';
         
-        // 1. Theme Toggle Icon Button (No text)
+        // 1. Theme Toggle Icon Button (Single bulb based on theme)
         const themeBtn = document.createElement('button');
         themeBtn.type = 'button';
         themeBtn.onclick = toggleTheme;
@@ -42,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         themeImg.style.display = "block";
         themeBtn.appendChild(themeImg);
         
-        // 2. Download PDF Icon Button (No text, uses Download.jpeg)
+        // 2. Download PDF Icon Button
         const downloadBtn = document.createElement('button');
         downloadBtn.type = 'button';
         downloadBtn.onclick = downloadPDF;
