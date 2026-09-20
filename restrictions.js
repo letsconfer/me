@@ -1,7 +1,7 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
-// SVG automatically adapts its color using the page's --text-color CSS variable
+// Self-contained SVGs: bulb adapts to theme variables, download icon stays distinct
 const bulbSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2m-6.364 1.636l1.414 1.414m12.728 0l-1.414 1.414M2 12h2m16 0h2M6.364 19.364l1.414-1.414m10.284 1.414l-1.414-1.414M12 6a6 6 0 0 1 6 6c0 2.22-1.25 4.15-3.08 5.15V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.85C7.25 16.15 6 14.22 6 12a6 6 0 0 1 6-6z"/><path d="M9 22h6"/></svg>`;
 
 const downloadSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
@@ -9,12 +9,7 @@ const downloadSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 function toggleTheme() {
     const body = document.body;
     const currentTheme = body.getAttribute("data-theme");
-    
-    if (currentTheme === "light") {
-        body.setAttribute("data-theme", "dark");
-    } else {
-        body.setAttribute("data-theme", "light");
-    }
+    body.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
 }
 
 function downloadPDF() {
@@ -35,35 +30,33 @@ document.addEventListener("DOMContentLoaded", function() {
         switcher.style.margin = '0';
         switcher.style.textAlign = 'right';
         switcher.style.zIndex = '10';
-        
         switcher.innerHTML = '';
         
+        const applyButtonStyle = (btn) => {
+            btn.type = 'button';
+            btn.style.background = 'transparent';
+            btn.style.border = 'none';
+            btn.style.outline = 'none';
+            btn.style.boxShadow = 'none';
+            btn.style.cursor = 'pointer';
+            btn.style.padding = '2px';
+            btn.style.display = 'inline-flex';
+            btn.style.alignItems = 'center';
+            btn.style.justifyContent = 'center';
+        };
+
         // 1. Theme Toggle Button
         const themeBtn = document.createElement('button');
-        themeBtn.type = 'button';
+        applyButtonStyle(themeBtn);
         themeBtn.onclick = toggleTheme;
         themeBtn.title = "Toggle Theme";
-        themeBtn.style.background = "transparent";
-        themeBtn.style.border = "none";
-        themeBtn.style.cursor = "pointer";
-        themeBtn.style.padding = "2px";
-        themeBtn.style.display = "inline-flex";
-        themeBtn.style.alignItems = "center";
-        themeBtn.style.justifyContent = "center";
         themeBtn.innerHTML = bulbSvg;
         
         // 2. Download PDF Button
         const downloadBtn = document.createElement('button');
-        downloadBtn.type = 'button';
+        applyButtonStyle(downloadBtn);
         downloadBtn.onclick = downloadPDF;
         downloadBtn.title = "Download PDF";
-        downloadBtn.style.background = "transparent";
-        downloadBtn.style.border = "none";
-        downloadBtn.style.cursor = "pointer";
-        downloadBtn.style.padding = "2px";
-        downloadBtn.style.display = "inline-flex";
-        downloadBtn.style.alignItems = "center";
-        downloadBtn.style.justifyContent = "center";
         downloadBtn.innerHTML = downloadSvg;
 
         switcher.appendChild(themeBtn);
