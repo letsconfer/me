@@ -1,15 +1,22 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
-// Self-contained SVGs: bulb adapts to theme variables, download icon stays distinct
-const bulbSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2m-6.364 1.636l1.414 1.414m12.728 0l-1.414 1.414M2 12h2m16 0h2M6.364 19.364l1.414-1.414m10.284 1.414l-1.414-1.414M12 6a6 6 0 0 1 6 6c0 2.22-1.25 4.15-3.08 5.15V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.85C7.25 16.15 6 14.22 6 12a6 6 0 0 1 6-6z"/><path d="M9 22h6"/></svg>`;
-
-const downloadSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
-
 function toggleTheme() {
     const body = document.body;
+    const themeImg = document.getElementById('theme-icon');
     const currentTheme = body.getAttribute("data-theme");
-    body.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
+    
+    if (currentTheme === "light") {
+        body.setAttribute("data-theme", "dark");
+        if (themeImg) {
+            themeImg.src = "light-bulb.svg";
+        }
+    } else {
+        body.setAttribute("data-theme", "light");
+        if (themeImg) {
+            themeImg.src = "dark-bulb.svg";
+        }
+    }
 }
 
 function downloadPDF() {
@@ -50,14 +57,31 @@ document.addEventListener("DOMContentLoaded", function() {
         applyButtonStyle(themeBtn);
         themeBtn.onclick = toggleTheme;
         themeBtn.title = "Toggle Theme";
-        themeBtn.innerHTML = bulbSvg;
+        
+        const currentTheme = document.body.getAttribute("data-theme") || "light";
+        
+        const themeImg = document.createElement('img');
+        themeImg.id = 'theme-icon';
+        themeImg.src = currentTheme === "dark" ? "light-bulb.svg" : "dark-bulb.svg";
+        themeImg.alt = "Toggle Theme";
+        themeImg.style.width = "20px";
+        themeImg.style.height = "20px";
+        themeImg.style.display = "block";
+        themeBtn.appendChild(themeImg);
         
         // 2. Download PDF Button
         const downloadBtn = document.createElement('button');
         applyButtonStyle(downloadBtn);
         downloadBtn.onclick = downloadPDF;
         downloadBtn.title = "Download PDF";
-        downloadBtn.innerHTML = downloadSvg;
+        
+        const downloadImg = document.createElement('img');
+        downloadImg.src = "Download.jpeg";
+        downloadImg.alt = "Download PDF";
+        downloadImg.style.width = "20px";
+        downloadImg.style.height = "20px";
+        downloadImg.style.display = "block";
+        downloadBtn.appendChild(downloadImg);
 
         switcher.appendChild(themeBtn);
         switcher.appendChild(downloadBtn);
