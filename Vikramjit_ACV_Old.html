@@ -12,26 +12,22 @@
         <!-- Theme switcher & Download buttons container positioned at top right -->
         <div class="theme-switcher"></div>
 
-        <!-- Avatar / Header Component Loaded Separately -->
+        <!-- Avatar / Header Component Loaded Separately with Interactive Links Injected -->
         <div id="avatar-slot"></div>
         <script>
             fetch('avatar.html')
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('avatar-slot').innerHTML = html;
+                    // Automatically inject interactive tel and copy-email functionality into the header text
+                    let modifiedHtml = html
+                        .replace(/\(\+91\)\s*9781381213/g, '<a href="tel:+919781381213" style="color: inherit; text-decoration: underline;">(+91) 9781381213</a>')
+                        .replace(/kuwar\.vikram@gmail\.com/g, '<a href="#" id="email-link" onclick="copyEmail(event, \'kuwar.vikram@gmail.com\')" style="color: inherit; text-decoration: underline;">kuwar.vikram@gmail.com</a><span id="copy-feedback" style="margin-left: 6px; font-size: 0.85em; color: #28a745; display: none; font-weight: bold;">(Copied!)</span>');
+                    document.getElementById('avatar-slot').innerHTML = modifiedHtml;
                 })
                 .catch(err => console.error('Error loading avatar:', err));
         </script>
         
         <hr>
-
-        <!-- Contact Information Bar with Interactive Call & Copy Email -->
-        <div class="contact-info" style="margin-bottom: 20px; font-weight: 500;">
-            Hyderabad, India | 
-            <a href="tel:+919781381213" style="color: inherit; text-decoration: underline;">(+91) 9781381213</a> | 
-            <a href="#" id="email-link" onclick="copyEmail(event, 'kuwar.vikram@gmail.com')" style="color: inherit; text-decoration: underline;">kuwar.vikram@gmail.com</a>
-            <span id="copy-feedback" style="margin-left: 8px; font-size: 0.85em; color: #28a745; display: none; font-weight: bold;">(Copied!)</span>
-        </div>
 
         <h2>PROFESSIONAL SUMMARY</h2>
         <p>Software Project Manager and Team Lead with 18+ years delivering enterprise software for Australian and Indian markets, specializing in RTO/VET compliance systems (AVETMISS, CRICOS, VFH/VSL, USI Integration) and EdTech platforms. Proven expertise in leading cross-functional Agile/Scrum teams, managing full product lifecycles, and applying Lean Six Sigma principles. Available immediately and open to relocation to Australia.</p>
@@ -117,7 +113,7 @@
         <h2>CERTIFICATIONS & EDUCATION</h2>
         <ul>
             <li><b>Certifications:</b> Beginner's Guide to Agile in Jira (Atlassian), Jira Foundation Badge (Atlassian), Advanced Lean Six Sigma Yellow Belt (Sparen & Gewinn), Lean Six Sigma Yellow & White Belts.</li>
-            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2002–2005).</li>
+            <li><b>Education:</b> Bachelor of Computer Applications (BCA) - Hindu College (2003–2006).</li>
         </ul>
     </div>
 
