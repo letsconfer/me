@@ -1,29 +1,28 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
-// Detect active theme from either html or body element, defaulting to light
-function getCurrentTheme() {
-    return document.documentElement.getAttribute("data-theme") || 
-           document.body.getAttribute("data-theme") || 
-           "light";
-}
-
-// Set theme attributes on both html and body to prevent CSS scoping mismatches
-function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    document.body.setAttribute("data-theme", theme);
-    
-    const themeImg = document.getElementById('theme-icon');
-    if (themeImg) {
-        // Light mode needs DarkBulb.jpeg, Dark mode needs LightBulb.jpeg
-        themeImg.src = (theme === "dark") ? "LightBulb.jpeg" : "DarkBulb.jpeg";
+function updateThemeButton() {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+        const currentTheme = document.body.getAttribute("data-theme") || "light";
+        // Light mode shows DarkBulb.jpeg, Dark mode shows LightBulb.jpeg
+        if (currentTheme === "dark") {
+            themeBtn.style.backgroundImage = "url('LightBulb.jpeg')";
+        } else {
+            themeBtn.style.backgroundImage = "url('DarkBulb.jpeg')";
+        }
     }
 }
 
 function toggleTheme() {
-    const current = getCurrentTheme();
-    const next = (current === "light") ? "dark" : "light";
-    applyTheme(next);
+    const body = document.body;
+    const html = document.documentElement;
+    const currentTheme = body.getAttribute("data-theme") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    
+    body.setAttribute("data-theme", newTheme);
+    html.setAttribute("data-theme", newTheme);
+    updateThemeButton();
 }
 
 function downloadPDF() {
@@ -46,52 +45,51 @@ document.addEventListener("DOMContentLoaded", function() {
         switcher.style.zIndex = '10';
         switcher.innerHTML = '';
         
-        const applyButtonStyle = (btn) => {
+        const baseButtonStyle = (btn) => {
             btn.type = 'button';
-            btn.style.background = 'transparent';
+            btn.style.backgroundSize = '20px 20px';
+            btn.style.backgroundRepeat = 'no-repeat';
+            btn.style.backgroundPosition = 'center';
+            btn.style.background.color = 'transparent';
+            btn.style.backgroundColor = 'transparent';
             btn.style.border = 'none';
             btn.style.outline = 'none';
             btn.style.boxShadow = 'none';
             btn.style.cursor = 'pointer';
-            btn.style.padding = '2px';
-            btn.style.display = 'inline-flex';
-            btn.style.alignItems = 'center';
-            btn.style.justifyContent = 'center';
+            btn.style.width = '24px';
+            btn.style.height = '24px';
+            btn.style.padding = '0';
+            btn.style.margin = '0 4px';
+            btn.style.display = 'inline-block';
+            btn.style.verticalAlign = 'middle';
         };
+
+        // Ensure default theme attribute exists
+        if (!document.body.hasAttribute("data-theme")) {
+            document.body.setAttribute("data-theme", "light");
+            document.documentElement.setAttribute("data-theme", "light");
+        }
 
         // 1. Theme Toggle Button
         const themeBtn = document.createElement('button');
-        applyButtonStyle(themeBtn);
+        themeBtn.id = 'theme-toggle-btn';
+        baseButtonStyle(themeBtn);
         themeBtn.onclick = toggleTheme;
         themeBtn.title = "Toggle Theme";
         
-        const themeImg = document.createElement('img');
-        themeImg.id = 'theme-icon';
-        themeImg.alt = "Toggle Theme";
-        themeImg.style.width = "20px";
-        themeImg.style.height = "20px";
-        themeImg.style.display = "block";
-        themeBtn.appendChild(themeImg);
-        
-        // Initialize active theme and icon immediately on load
-        applyTheme(getCurrentTheme());
-        
         // 2. Download PDF Button
         const downloadBtn = document.createElement('button');
-        applyButtonStyle(downloadBtn);
+        downloadBtn.id = 'download-pdf-btn';
+        baseButtonStyle(downloadBtn);
         downloadBtn.onclick = downloadPDF;
         downloadBtn.title = "Download PDF";
-        
-        const downloadImg = document.createElement('img');
-        downloadImg.src = "Download.jpeg";
-        downloadImg.alt = "Download PDF";
-        downloadImg.style.width = "20px";
-        downloadImg.style.height = "20px";
-        downloadImg.style.display = "block";
-        downloadBtn.appendChild(downloadImg);
+        downloadBtn.style.backgroundImage = "url('Download.jpeg')";
 
         switcher.appendChild(themeBtn);
         switcher.appendChild(downloadBtn);
+
+        // Set initial theme toggle icon
+        updateThemeButton();
     }
 });
 
