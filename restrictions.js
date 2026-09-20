@@ -1,21 +1,29 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
-function updateThemeIcon(theme) {
+// Detect active theme from either html or body element, defaulting to light
+function getCurrentTheme() {
+    return document.documentElement.getAttribute("data-theme") || 
+           document.body.getAttribute("data-theme") || 
+           "light";
+}
+
+// Set theme attributes on both html and body to prevent CSS scoping mismatches
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.body.setAttribute("data-theme", theme);
+    
     const themeImg = document.getElementById('theme-icon');
     if (themeImg) {
-        // Light theme shows DarkBulb.jpeg, Dark theme shows LightBulb.jpeg
-        themeImg.src = theme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
+        // Light mode needs DarkBulb.jpeg, Dark mode needs LightBulb.jpeg
+        themeImg.src = (theme === "dark") ? "LightBulb.jpeg" : "DarkBulb.jpeg";
     }
 }
 
 function toggleTheme() {
-    const body = document.body;
-    const currentTheme = body.getAttribute("data-theme") || "light";
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    
-    body.setAttribute("data-theme", newTheme);
-    updateThemeIcon(newTheme);
+    const current = getCurrentTheme();
+    const next = (current === "light") ? "dark" : "light";
+    applyTheme(next);
 }
 
 function downloadPDF() {
@@ -57,8 +65,6 @@ document.addEventListener("DOMContentLoaded", function() {
         themeBtn.onclick = toggleTheme;
         themeBtn.title = "Toggle Theme";
         
-        const currentTheme = document.body.getAttribute("data-theme") || "light";
-        
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
         themeImg.alt = "Toggle Theme";
@@ -67,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
         themeImg.style.display = "block";
         themeBtn.appendChild(themeImg);
         
-        // Set correct initial icon based on theme
-        updateThemeIcon(currentTheme);
+        // Initialize active theme and icon immediately on load
+        applyTheme(getCurrentTheme());
         
         // 2. Download PDF Button
         const downloadBtn = document.createElement('button');
