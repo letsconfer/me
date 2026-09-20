@@ -5,11 +5,11 @@ function updateThemeButton() {
     const themeBtn = document.getElementById('theme-toggle-btn');
     if (themeBtn) {
         const currentTheme = document.body.getAttribute("data-theme") || "light";
-        // Light mode shows DarkBulb.jpeg, Dark mode shows LightBulb.jpeg
+        // Light mode -> DarkBulb.jpeg, Dark mode -> LightBulb.jpeg
         if (currentTheme === "dark") {
-            themeBtn.style.backgroundImage = "url('LightBulb.jpeg')";
+            themeBtn.style.backgroundImage = "url('LightBulb.jpeg?v=2026')";
         } else {
-            themeBtn.style.backgroundImage = "url('DarkBulb.jpeg')";
+            themeBtn.style.backgroundImage = "url('DarkBulb.jpeg?v=2026')";
         }
     }
 }
@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.style.backgroundSize = '20px 20px';
             btn.style.backgroundRepeat = 'no-repeat';
             btn.style.backgroundPosition = 'center';
-            btn.style.background.color = 'transparent';
             btn.style.backgroundColor = 'transparent';
             btn.style.border = 'none';
             btn.style.outline = 'none';
@@ -64,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.style.verticalAlign = 'middle';
         };
 
-        // Ensure default theme attribute exists
         if (!document.body.hasAttribute("data-theme")) {
             document.body.setAttribute("data-theme", "light");
             document.documentElement.setAttribute("data-theme", "light");
@@ -83,12 +81,11 @@ document.addEventListener("DOMContentLoaded", function() {
         baseButtonStyle(downloadBtn);
         downloadBtn.onclick = downloadPDF;
         downloadBtn.title = "Download PDF";
-        downloadBtn.style.backgroundImage = "url('Download.jpeg')";
+        downloadBtn.style.backgroundImage = "url('Download.jpeg?v=2026')";
 
         switcher.appendChild(themeBtn);
         switcher.appendChild(downloadBtn);
 
-        // Set initial theme toggle icon
         updateThemeButton();
     }
 });
