@@ -1,20 +1,18 @@
 const restrictionMessage = "This action is restricted, please contact Vikramjit for more details.";
 let isInternalAction = false;
 
-// Theme Toggle Function with Icon Switching
 function toggleTheme() {
     const body = document.body;
     const themeBtnImg = document.getElementById('theme-icon');
     if (body.getAttribute("data-theme") === "light") {
         body.setAttribute("data-theme", "dark");
-        if (themeBtnImg) themeBtnImg.src = "bulblitoff.jpeg";
+        if (themeBtnImg) themeBtnImg.src = "LightBulb.jpeg";
     } else {
         body.setAttribute("data-theme", "light");
-        if (themeBtnImg) themeBtnImg.src = "bulbliton.jpeg";
+        if (themeBtnImg) themeBtnImg.src = "DarkBulb.jpeg";
     }
 }
 
-// Secure PDF Download Function (Bypasses restriction specifically for this button)
 function downloadPDF() {
     isInternalAction = true;
     window.print();
@@ -23,13 +21,12 @@ function downloadPDF() {
     }, 1000);
 }
 
-// Automatically inject and manage icon buttons inside .theme-switcher
 document.addEventListener("DOMContentLoaded", function() {
     const switcher = document.querySelector('.theme-switcher');
     if (switcher) {
         switcher.innerHTML = '';
         
-        // 1. Theme Toggle Icon Button
+        // 1. Theme Toggle Icon Button (No text)
         const themeBtn = document.createElement('button');
         themeBtn.type = 'button';
         themeBtn.onclick = toggleTheme;
@@ -38,14 +35,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const currentTheme = document.body.getAttribute("data-theme") || "light";
         const themeImg = document.createElement('img');
         themeImg.id = 'theme-icon';
-        themeImg.src = currentTheme === "dark" ? "DarkBulb.jpeg" : "LightBulb.jpeg";
-        themeImg.alt = "Theme";
+        themeImg.src = currentTheme === "dark" ? "LightBulb.jpeg" : "DarkBulb.jpeg";
+        themeImg.alt = "";
         themeImg.style.width = "20px";
         themeImg.style.height = "20px";
-        themeImg.style.verticalAlign = "middle";
+        themeImg.style.display = "block";
         themeBtn.appendChild(themeImg);
         
-        // 2. Download PDF Icon Button (No name, uses Download.jpeg)
+        // 2. Download PDF Icon Button (No text, uses Download.jpeg)
         const downloadBtn = document.createElement('button');
         downloadBtn.type = 'button';
         downloadBtn.onclick = downloadPDF;
@@ -53,20 +50,22 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const downloadImg = document.createElement('img');
         downloadImg.src = "Download.jpeg";
-        downloadImg.alt = "Download PDF";
+        downloadImg.alt = "";
         downloadImg.style.width = "20px";
         downloadImg.style.height = "20px";
-        downloadImg.style.verticalAlign = "middle";
+        downloadImg.style.display = "block";
         downloadBtn.appendChild(downloadImg);
 
-        // Styling for both icon buttons
+        // Styling for both icon-only buttons
         [themeBtn, downloadBtn].forEach(btn => {
             btn.style.background = "var(--container-bg)";
-            btn.style.color = "var(--text-color)";
             btn.style.border = "1px solid var(--border-color)";
-            btn.style.padding = "6px 10px";
+            btn.style.padding = "6px";
             btn.style.borderRadius = "4px";
             btn.style.cursor = "pointer";
+            btn.style.display = "inline-flex";
+            btn.style.alignItems = "center";
+            btn.style.justifyContent = "center";
         });
         themeBtn.style.marginRight = "8px";
 
