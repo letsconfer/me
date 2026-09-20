@@ -14,7 +14,7 @@ function toggleTheme() {
     } else {
         body.setAttribute("data-theme", "light");
         if (themeImg) {
-            themeImg.src = "dark-bulb.svg";
+            themeImg.src = "Dark-bulb.svg";
         }
     }
 }
