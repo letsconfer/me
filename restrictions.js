@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
         themeImg.style.display = "block";
         themeBtn.appendChild(themeImg);
         
-        // Set correct initial icon
+        // Set correct initial icon based on theme
         updateThemeIcon(currentTheme);
         
         // 2. Download PDF Button
