@@ -9,10 +9,12 @@ function updateThemeButton() {
         // Button shows what theme you'll GET when you click it
         // Light theme ON -> show DarkBulb (to switch to dark)
         // Dark theme ON -> show LightBulb (to switch to light)
-        if (currentTheme === "light") {
-            themeBtn.style.backgroundImage = "url('DarkBulb.jpeg?v=2026')";
-        } else {
+        console.log("Current Theme:", currentTheme); // DEBUG
+        
+        if (currentTheme === "dark") {
             themeBtn.style.backgroundImage = "url('LightBulb.jpeg?v=2026')";
+        } else {
+            themeBtn.style.backgroundImage = "url('DarkBulb.jpeg?v=2026')";
         }
     }
 }
@@ -25,7 +27,20 @@ function toggleTheme() {
     
     body.setAttribute("data-theme", newTheme);
     html.setAttribute("data-theme", newTheme);
-    updateThemeButton();
+    
+    // HARD RESET OPTION: Complete reinitialize theme button
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+        themeBtn.style.backgroundImage = 'none'; // Clear old image
+    }
+    
+    // Force repaint
+    void body.offsetHeight;
+    
+    // Reinitialize button with fresh styles
+    setTimeout(() => {
+        updateThemeButton();
+    }, 50);
 }
 
 function downloadPDF() {
