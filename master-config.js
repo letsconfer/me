@@ -8,8 +8,8 @@ window.CV_MASTER_CONFIG = {
     allowScreenshot: false,     // false = Blocks PrintScreen/shortcuts, true = Allowed
     
     // 2. Toolbar Icon Controls
-    showDownloadIcon: true,     // true = Show PDF download icon, false = Hidden
-    showThemeIcon: false,        // true = Show Theme toggle icon, false = Hidden
+    showDownloadIcon: false,     // true = Show PDF download icon, false = Hidden
+    showThemeIcon: true,        // true = Show Theme toggle icon, false = Hidden
     
     // 3. Profile Image Setting (Filename or uploaded image path)
     profileImage: "me.jpeg"     // Default profile image file
