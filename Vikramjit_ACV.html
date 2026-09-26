@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vikramjit Singh - Australian CV</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="logo.png">
+    
+     <!-- Move master-config.js here so the favicon loads immediately -->
+    <script src="master-config.js"></script>
+    <script src="restrictions.js"></script>
 
 </head>
 <body data-theme="light">
@@ -133,11 +136,4 @@
             console.error('Failed to copy email: ', err);
         });
     }
-    </script>
-    
-    <!-- IMPORTANT: Load master-config.js FIRST, then restrictions.js -->
-    <script src="master-config.js"></script>
-    <script src="restrictions.js"></script>
-
-</body>
-</html>
+   
