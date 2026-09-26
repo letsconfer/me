@@ -174,10 +174,16 @@ document.addEventListener('keydown', function(e) {
         alert(restrictionMessage);
     }
     
-    // Block PrintScreen
+    // Block Windows PrintScreen
     if (e.key === 'PrintScreen' || e.keyCode === 44) {
         e.preventDefault();
         navigator.clipboard.writeText('');
+        alert(restrictionMessage);
+    }
+
+    // Block Mac Screenshot Shortcuts (Cmd + Shift + 3, 4, 5)
+    if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
+        e.preventDefault();
         alert(restrictionMessage);
     }
 
