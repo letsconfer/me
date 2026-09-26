@@ -15,7 +15,7 @@ window.CV_MASTER_CONFIG = {
     profileImage: "me.jpeg",     // <--- NOTE: Added comma here!
         
     // 4. Favicon Setting
-    favicon: "logo1.png"          // Favicon image file path
+    favicon: "logo2.png"          // Favicon image file path
 };
 
 // ==========================================
